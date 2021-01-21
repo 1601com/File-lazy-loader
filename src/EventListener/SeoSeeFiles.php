@@ -39,8 +39,7 @@ class SeoSeeFiles
         }
 
         $removeExternalFiles = $dc->activeRecord->fileLazyLoaderModifyExtJs === '1' ? false : true;
-
-        var_dump($this->_jsLoader->returnMultiColumnWizardArray($pathLoadedFiles, unserialize($savedFiles), $removeExternalFiles));
+        
         return $this->_jsLoader->returnMultiColumnWizardArray($pathLoadedFiles, unserialize($savedFiles), $removeExternalFiles);
     }
 
