@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace agentur1601com\StyleLazyLoader;
+namespace Agentur1601com\FileLazyLoader;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class StyleLazyLoaderBundle extends Bundle
+class FileLazyLoaderBundle extends Bundle
 {
 }

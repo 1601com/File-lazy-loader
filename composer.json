@@ -1,53 +1,54 @@
 {
-    "name": "agentur1601com/style-lazy-loader",
-    "type": "contao-bundle",
-    "description": "",
-    "homepage": "https://1601.com",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Lukas M. Beck",
-            "homepage": "https://www.1601.com/",
-            "email": "lb@1601.com"
-        }
-    ],
-    "require": {
-        "php": "^7.2 || ^8.0",
-        "contao/core-bundle": "^4.9",
-        "symfony/config": "^4.4 || ^5.1",
-        "symfony/dependency-injection": "^4.4 || ^5.1",
-        "symfony/http-kernel": "^4.4 || ^5.1"
+  "name": "agentur1601com/file-lazy-loader",
+  "type": "contao-bundle",
+  "description": "",
+  "homepage": "https://1601.com",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Florian Scheyer",
+      "homepage": "https://www.1601.com/",
+      "email": "fs@1601.com"
     },
-    "conflict": {
-        "contao/manager-plugin": "<2.0 || >=3.0"
-    },
-    "require-dev": {
-        "contao/manager-plugin": "^2.0",
-        "contao/easy-coding-standard": "^2.0",
-        "phpunit/phpunit": "^8.4",
-        "symfony/phpunit-bridge": "^4.4 || ^5.1",
-        "agentur1601com/core-bundle": "^1.1.0"
-    },
-    "extra": {
-        "contao-manager-plugin": "Contao\\SkeletonBundle\\ContaoManager\\Plugin"
-    },
-    "autoload": {
-        "psr-4": {
-            "Contao\\SkeletonBundle\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Contao\\SkeletonBundle\\Tests\\": "tests/"
-        }
-    },
-    "support": {
-        "issues": "https://github.com/contao/skeleton-bundle/issues",
-        "source": "https://github.com/contao/skeleton-bundle"
-    },
-    "scripts": {
-        "cs-fixer": [
-            "vendor/bin/ecs check src/ tests/ --fix --ansi"
-        ]
+    {
+      "name": "Lukas M. Beck",
+      "homepage": "https://www.1601.com/",
+      "email": "lb@1601.com"
     }
+  ],
+  "require": {
+    "php": "^7.2 || ^8.0",
+    "contao/core-bundle": "^4.9",
+    "symfony/config": "^4.4 || ^5.1",
+    "symfony/dependency-injection": "^4.4 || ^5.1",
+    "symfony/http-kernel": "^4.4 || ^5.1"
+  },
+  "conflict": {
+    "contao/manager-plugin": "<2.0 || >=3.0"
+  },
+  "require-dev": {
+    "contao/manager-plugin": "^2.0",
+    "contao/easy-coding-standard": "^2.0",
+    "phpunit/phpunit": "^8.4",
+    "symfony/phpunit-bridge": "^4.4 || ^5.1",
+    "agentur1601com/core-bundle": "^1.1.0"
+  },
+  "extra": {
+    "contao-manager-plugin": "Agentur1601com\\FileLazyLoader\\ContaoManager\\Plugin"
+  },
+  "autoload": {
+    "psr-4": {
+      "Agentur1601com\\FileLazyLoader\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Agentur1601com\\FileLazyLoader\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "cs-fixer": [
+      "vendor/bin/ecs check src/ tests/ --fix --ansi"
+    ]
+  }
 }

@@ -1,3 +1,25 @@
 services:
     _defaults:
         autoconfigure: true
+        autowire: true
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    Agentur1601com\FileLazyLoader\:
+        resource: '../../../src/*'
+        exclude: '../../../src/{DependencyInjection,Entity,Tests,Kernel.php,Resources}'
+
+    Agentur1601com\FileLazyLoader\EventListener\SeoSeeFiles:
+        public: true
+        autowire: true
+
+    Agentur1601com\FileLazyLoader\EventListener\Loader\StyleLoader:
+        public: true
+        autowire: true
+
+    Agentur1601com\FileLazyLoader\EventListener\Loader\JsLoader:
+        public: true
+        autowire: true
+
+
+
