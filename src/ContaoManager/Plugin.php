@@ -9,6 +9,7 @@ use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
 use Agentur1601com\FileLazyLoader\FileLazyLoaderBundle;
+use Agentur1601com\CoreBundle\Agentur1601comCoreBundle;
 
 class Plugin implements BundlePluginInterface
 {
@@ -16,7 +17,7 @@ class Plugin implements BundlePluginInterface
     {
         return [
             BundleConfig::create(FileLazyLoaderBundle::class)
-                ->setLoadAfter([ContaoCoreBundle::class]),
+                ->setLoadAfter([Agentur1601comCoreBundle::class]),
         ];
     }
 }

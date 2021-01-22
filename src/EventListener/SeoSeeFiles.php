@@ -39,7 +39,7 @@ class SeoSeeFiles
         }
 
         $removeExternalFiles = $dc->activeRecord->fileLazyLoaderModifyExtJs === '1' ? false : true;
-        
+
         return $this->_jsLoader->returnMultiColumnWizardArray($pathLoadedFiles, unserialize($savedFiles), $removeExternalFiles);
     }
 
@@ -51,23 +51,23 @@ class SeoSeeFiles
      */
     public function loadStyleFiles($savedFiles, DataContainer $dc)
     {
-        if (TL_MODE == 'BE') $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/seosee/styleLoader.js|static';
+        if (TL_MODE == 'BE') $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/filelazyloader/js/styleLoader.js|static';
 
-        $StyleLoader = new StyleLoader();
-        #$Helper = new Helper();
+        $paths = $this->_helper->getPathsByUUIDs($dc->activeRecord->fileLazyLoaderStyleFiles);
 
-        $files = $this->_helper->getPathsByUUIDs($dc->activeRecord->seoseeStyleFiles);
-
-        if (empty($files))
+        if(empty($paths))
         {
             return serialize([]);
         }
 
-        if (!$savedFiles)
-        {
-            $savedFiles = '';
+        $pathLoadedFiles = [];
+
+        foreach($paths as $path) {
+           $pathLoadedFiles[] = sprintf('%s/%s', TL_ROOT, $this->_helper::safePath($path));
         }
 
-        return $StyleLoader->returnMultiColumnWizardArray($files, $savedFiles);
+        #var_dump($pathLoadedFiles);
+
+        #return 
     }
 }

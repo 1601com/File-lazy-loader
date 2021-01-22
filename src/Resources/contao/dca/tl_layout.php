@@ -17,7 +17,7 @@ PaletteManipulator::create()
 PaletteManipulator::create()
     ->addLegend('fileLazyLoader_files_style_legend', 'fileLazyLoader_files_js_legend', PaletteManipulator::POSITION_AFTER)
 
-    ->addField('fileLazyLoaderStyleFiles', 'fileLazyLoader_files_style_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('fileLazyLoaderStylePath', 'fileLazyLoader_files_style_legend', PaletteManipulator::POSITION_APPEND)
     ->addField('fileLazyLoaderStyleFilesLoad', 'fileLazyLoader_files_style_legend', PaletteManipulator::POSITION_APPEND)
 
     ->applyToPalette('default', 'tl_layout')
@@ -132,18 +132,18 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['fileLazyLoaderModifyExtJs'] = [
 ];
 
 
-$GLOBALS['TL_DCA']['tl_layout']['fields']['fileLazyLoaderStyleFiles'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_layout']['fileLazyLoaderStyleFiles'],
+$GLOBALS['TL_DCA']['tl_layout']['fields']['fileLazyLoaderStylePath'] = [
+    'label' => &$GLOBALS['TL_LANG']['tl_layout']['fileLazyLoaderStylePath'],
     'exclude' => true,
     'inputType' => 'fileTree',
     'eval' => [
         'multiple' => true,
         'fieldType' => 'checkbox',
-        'filesOnly' => true,
-        'extensions' => 'css,scss,less',
+        #'filesOnly' => true,
+        #'extensions' => 'css,scss,less',
         'submitOnChange' => true,
         'alwaysSave' => true,
-        'tl_class' => 'fileLazyLoaderStyleFiles'
+        'tl_class' => 'fileLazyLoaderStylePath'
     ],
     'sql' => "BLOB NULL",
 ];
@@ -156,6 +156,14 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['fileLazyLoaderStyleFilesLoad'] = [
         'tl_class' => 'clr m12',
         'dragAndDrop' => true,
         'columnFields' => [
+            'select' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_layout']['style_select'],
+                'exclude' => true,
+                'inputType' => 'checkbox',
+                'eval' => [
+                    'style' => 'width:20px'
+                ],
+            ],
             'style_files_path' => [
                 'label' => &$GLOBALS['TL_LANG']['tl_layout']['style_files_path'],
                 'inputType' => 'text',

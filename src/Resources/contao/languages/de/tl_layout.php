@@ -19,8 +19,12 @@ $GLOBALS['TL_LANG'][TABLE_NAME]['js_param'] = ["Parameter"];
 // Style Loader
 $GLOBALS['TL_LANG'][TABLE_NAME]['fileLazyLoader_files_style_legend'] = 'FileLazyLoader - CSS';
 
-$GLOBALS['TL_LANG'][TABLE_NAME]['fileLazyLoaderStyleFiles'] = ['CSS, SCSS, LESS', ''];
+$GLOBALS['TL_LANG'][TABLE_NAME]['fileLazyLoaderStylePath'] = ['CSS, SCSS, LESS', ''];
 $GLOBALS['TL_LANG'][TABLE_NAME]['fileLazyLoaderStyleFilesLoad'] = ['Style-Dateien', ''];
+
+$GLOBALS['TL_LANG'][TABLE_NAME]['style_select'] = ["Aktiv"];
+$GLOBALS['TL_LANG'][TABLE_NAME]['style_files_path'] = ["Pfad"];
+$GLOBALS['TL_LANG'][TABLE_NAME]['style_param'] = ["Parameter"];
 
 
 

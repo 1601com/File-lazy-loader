@@ -74,6 +74,7 @@ class Helper
             }
             closedir($handle);
         }
+
         return $files;
     }
 

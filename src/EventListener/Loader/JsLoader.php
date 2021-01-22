@@ -1,6 +1,7 @@
 <?php
 
 namespace Agentur1601com\FileLazyLoader\EventListener\Loader;
+
 use Contao\LayoutModel;
 use MatthiasMullie\Minify;
 use Contao\Combiner;
@@ -16,7 +17,7 @@ class JsLoader
      */
     public function returnMultiColumnWizardArray($foundedFiles, $savedFiles, bool $removeExternFiles = false)
     {
-        if(!is_array($savedFiles)) {
+        if (!is_array($savedFiles)) {
             $savedFiles = [];
         }
 
@@ -24,18 +25,14 @@ class JsLoader
 
         $returnArray = [];
 
-        foreach ($savedFiles as $savedFile)
-        {
-            if ($savedFile['js_files_extFile'] === "1" && !$removeExternFiles)
-            {
+        foreach ($savedFiles as $savedFile) {
+            if ($savedFile['js_files_extFile'] === "1" && !$removeExternFiles) {
                 array_unshift($returnArray, $savedFile);
                 continue;
             }
 
-            foreach ($foundedFiles as $pathLoadedKey => $pathLoadedFile)
-            {
-                if(str_replace(TL_ROOT,"", $pathLoadedFile) === $savedFile['js_files_path'])
-                {
+            foreach ($foundedFiles as $pathLoadedKey => $pathLoadedFile) {
+                if (str_replace(TL_ROOT, "", $pathLoadedFile) === $savedFile['js_files_path']) {
                     $arrayValue = $this->setWizardArray(
                         $savedFile['select'],
                         $savedFile['js_files_path'],
@@ -44,8 +41,7 @@ class JsLoader
                         $savedFile['js_minimize']
                     );
 
-                    if($savedFile['select'])
-                    {
+                    if ($savedFile['select']) {
                         array_unshift($returnArray, $arrayValue);
                         unset($foundedFiles[$pathLoadedKey]);
                     }
@@ -55,9 +51,8 @@ class JsLoader
             }
         }
 
-        foreach ($foundedFiles as $pathLoadedFile)
-        {
-            $tmpPath = str_replace(TL_ROOT,"", $pathLoadedFile);
+        foreach ($foundedFiles as $pathLoadedFile) {
+            $tmpPath = str_replace(TL_ROOT, "", $pathLoadedFile);
             $returnArray[] = $this->setWizardArray(
                 "",
                 $tmpPath
@@ -74,10 +69,8 @@ class JsLoader
      */
     public function removeExtFiles($filesArray)
     {
-        foreach ($filesArray as &$file)
-        {
-            if ($file['js_files_extFile'] === '1')
-            {
+        foreach ($filesArray as &$file) {
+            if ($file['js_files_extFile'] === '1') {
                 unset($file);
             }
         }
@@ -106,10 +99,8 @@ class JsLoader
      */
     public function loadJs($objPage, $objLayout, $objPageRegular)
     {
-        if(isset($objLayout->fileLazyLoaderJsFiles) && is_array(($jsFilesArray = unserialize($objLayout->fileLazyLoaderJsFiles))))
-        {
-            if ($objLayout->fileLazyLoaderModifyExtJs === '1')
-            {
+        if (isset($objLayout->fileLazyLoaderJsFiles) && is_array(($jsFilesArray = unserialize($objLayout->fileLazyLoaderJsFiles)))) {
+            if ($objLayout->fileLazyLoaderModifyExtJs === '1') {
                 #require(TL_ROOT . '/system/initialize.php');
 
                 $jsFilesArray = $this->mergeWizardArrByGlobalScriptArr(
@@ -127,25 +118,21 @@ class JsLoader
                 $GLOBALS['TL_JAVASCRIPT'] = [];
             }
 
-            foreach ($jsFilesArray as $jsFile)
-            {
+            foreach ($jsFilesArray as $jsFile) {
                 $link = $this->removeTrailingSlash($jsFile["js_files_path"]);
 
-                if (!$jsFile["select"] || !file_exists(TL_ROOT . $link))
-                {
+                if (!$jsFile["select"] || !file_exists(TL_ROOT . $link)) {
                     continue;
                 }
 
-                if ($jsFile['js_minimize'] && $jsFile['js_files_extFile'] !== '1')
-                {
+                if ($jsFile['js_minimize'] && $jsFile['js_files_extFile'] !== '1') {
                     $Combinder = new Combiner();
                     $Combinder->add($jsFile["js_files_path"]);
                     $link = $Combinder->getCombinedFile();
-                    $this->minimizeFile(TL_ROOT . $jsFile["js_files_path"],TL_ROOT . "/" . $link);
+                    $this->minimizeFile(TL_ROOT . $jsFile["js_files_path"], TL_ROOT . "/" . $link);
                 }
 
-                switch ($jsFile["js_param"])
-                {
+                switch ($jsFile["js_param"]) {
                     case 'footer':
                         $GLOBALS['TL_BODY'][] = "<script src='" . $link . "'>";
                         break;
@@ -154,15 +141,15 @@ class JsLoader
                         $GLOBALS['TL_JAVASCRIPT'][] = $link;
                         break;
                     case 'preload_push':
-                        header("Link: <" . $link . ">; rel=preload; as=script",false);
+                        header("Link: <" . $link . ">; rel=preload; as=script", false);
                         $GLOBALS['TL_JAVASCRIPT'][] = $link;
                         break;
                     case 'defer':
-                        $GLOBALS['TL_HEAD'][] = "<script src='".$link."' defer></script>";
+                        $GLOBALS['TL_HEAD'][] = "<script src='" . $link . "' defer></script>";
                         break;
                     default:
                         $jsFile["js_param"] = empty($jsFile["js_param"]) ? 'static' : $jsFile["js_param"];
-                        $GLOBALS['TL_JAVASCRIPT'][] = $link."|".$jsFile["js_param"];
+                        $GLOBALS['TL_JAVASCRIPT'][] = $link . "|" . $jsFile["js_param"];
                 }
             }
         }
@@ -174,21 +161,16 @@ class JsLoader
      */
     private function parseGlobalJsPaths(array $globalJsPaths = [])
     {
-        if (!is_array($globalJsPaths))
-        {
+        if (!is_array($globalJsPaths)) {
             return [];
         }
 
         $returnArr = [];
 
-        foreach ($globalJsPaths as $key => $pathValue)
-        {
-            if (is_string($key))
-            {
+        foreach ($globalJsPaths as $key => $pathValue) {
+            if (is_string($key)) {
                 $returnArr[$key] = explode('|', $pathValue);
-            }
-            else
-            {
+            } else {
                 $returnArr[] = explode('|', $pathValue);
             }
         }
@@ -215,12 +197,12 @@ class JsLoader
     )
     {
         return [
-            "select"            => $select,
-            "js_files_path"     => $js_files_path,
+            "select" => $select,
+            "js_files_path" => $js_files_path,
             "js_files_path_min" => $js_files_path_min,
-            "js_param"          => $js_param,
-            "js_minimize"       => $js_minimize,
-            "js_files_extFile"  => $js_files_extFile,
+            "js_param" => $js_param,
+            "js_minimize" => $js_minimize,
+            "js_files_extFile" => $js_files_extFile,
         ];
     }
 
@@ -231,28 +213,22 @@ class JsLoader
      */
     private function mergeWizardArrByGlobalScriptArr(array $wizardArray, array $mergeArray)
     {
-        foreach ($wizardArray as &$wizardElem)
-        {
-            foreach ($mergeArray as $key => &$mergeElem)
-            {
-                if ($wizardElem['js_files_path'] === $mergeElem[0])
-                {
+        foreach ($wizardArray as &$wizardElem) {
+            foreach ($mergeArray as $key => &$mergeElem) {
+                if ($wizardElem['js_files_path'] === $mergeElem[0]) {
                     $wizardElem['verified'] = 1;
                     unset($mergeArray[$key]);
                 }
             }
 
-            if ($wizardElem['js_files_extFile'] === '1' && $wizardElem['verified'] !== '1')
-            {
+            if ($wizardElem['js_files_extFile'] === '1' && $wizardElem['verified'] !== '1') {
                 unset($wizardElem);
-            }
-            else {
+            } else {
                 unset($wizardElem['verified']);
             }
         }
 
-        foreach ($mergeArray as $key => $mergeElem)
-        {
+        foreach ($mergeArray as $key => $mergeElem) {
             $wizardArrayElem = $this->setWizardArray(
                 '1',
                 $mergeElem[0],
@@ -262,12 +238,9 @@ class JsLoader
                 '1'
             );
 
-            if (is_string($key) && !empty($key))
-            {
+            if (is_string($key) && !empty($key)) {
                 $wizardArray[$key] = $wizardArrayElem;
-            }
-            else
-            {
+            } else {
                 array_unshift($wizardArray, $wizardArrayElem);
             }
         }
@@ -281,7 +254,7 @@ class JsLoader
      */
     private function removeTrailingSlash(string $path)
     {
-        return '/' . ltrim(rtrim($path,'/'), '/');
+        return '/' . ltrim(rtrim($path, '/'), '/');
     }
 
 }
