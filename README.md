@@ -28,6 +28,3 @@ This way optimized scripts and styles can be loaded for Google.
 ### Support
 
 Contact: support@1601.com
-
----
-
