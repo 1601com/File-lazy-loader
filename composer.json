@@ -33,10 +33,5 @@
     "psr-4": {
       "Agentur1601com\\FileLazyLoader\\": "src/"
     }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Agentur1601com\\FileLazyLoader\\Tests\\": "tests/"
-    }
   }
 }

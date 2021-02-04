@@ -1,28 +1,20 @@
 <?php
 
-use Agentur1601com\FileLazyLoader\EventListener\SeoSeeFiles;
-use Agentur1601com\FileLazyLoader\EventListener\Loader\StyleLoader;
+use Agentur1601com\FileLazyLoader\EventListener\Loader2\Loader2JS;
+use Agentur1601com\FileLazyLoader\EventListener\Loader2\Loader2Style;
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
 
 PaletteManipulator::create()
     ->addLegend('fileLazyLoader_files_js_legend', 'expert_legend', PaletteManipulator::POSITION_BEFORE)
-
     ->addField('fileLazyLoaderJsPath', 'fileLazyLoader_files_js_legend', PaletteManipulator::POSITION_APPEND)
     ->addField('fileLazyLoaderJsFiles', 'fileLazyLoader_files_js_legend', PaletteManipulator::POSITION_APPEND)
-    ->addField('fileLazyLoaderModifyExtJs', 'fileLazyLoader_files_js_legend', PaletteManipulator::POSITION_APPEND)
-
-    ->applyToPalette('default', 'tl_layout')
-;
+    ->applyToPalette('default', 'tl_layout');
 
 PaletteManipulator::create()
     ->addLegend('fileLazyLoader_files_style_legend', 'fileLazyLoader_files_js_legend', PaletteManipulator::POSITION_AFTER)
-
     ->addField('fileLazyLoaderStylePath', 'fileLazyLoader_files_style_legend', PaletteManipulator::POSITION_APPEND)
     ->addField('fileLazyLoaderStyleFilesLoad', 'fileLazyLoader_files_style_legend', PaletteManipulator::POSITION_APPEND)
-
-    ->applyToPalette('default', 'tl_layout')
-;
-
+    ->applyToPalette('default', 'tl_layout');
 
 $GLOBALS['TL_DCA']['tl_layout']['fields']['fileLazyLoaderJsPath'] = [
     'label' => &$GLOBALS['TL_LANG']['tl_layout']['fileLazyLoaderJsPath'],
@@ -32,10 +24,10 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['fileLazyLoaderJsPath'] = [
         'multiple' => true,
         'fieldType' => 'checkbox',
         'mandatory' => false,
-        'files' => false,
+        'files' => true,
+        'filesOnly' => true,
         'tl_class' => 'w50 m12 fileLazyLoaderJsPath',
-        'submitOnChange' => true,
-        'alwaysSave' => true
+        'extensions' => 'js,JS',
     ],
     'sql' => "BLOB NULL",
 ];
@@ -82,7 +74,6 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['fileLazyLoaderJsFiles'] = [
                 'options' => [
                     'async' => 'Async',
                     'defer' => 'Defer',
-                    'footer' => 'Footer',
                     'preload' => 'Preload',
                     'preload_push' => 'Preload push'
                 ],
@@ -116,12 +107,12 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['fileLazyLoaderJsFiles'] = [
         ],
     ],
     'load_callback' => [
-        [SeoSeeFiles::class, 'loadJsFiles']
+        [Loader2JS::class, 'getMultiColumnWizardFiles']
     ],
     'sql' => "blob NULL"
 ];
 
-$GLOBALS['TL_DCA']['tl_layout']['fields']['fileLazyLoaderModifyExtJs'] = [
+/*$GLOBALS['TL_DCA']['tl_layout']['fields']['fileLazyLoaderModifyExtJs'] = [
     'label' => &$GLOBALS['TL_LANG']['tl_layout']['fileLazyLoaderModifyExtJs'],
     'exclude' => true,
     'inputType' => 'checkbox',
@@ -129,8 +120,7 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['fileLazyLoaderModifyExtJs'] = [
         'tl_class' => 'w50 m12 fileLazyLoaderJsPath',
     ],
     'sql' => "char(1) NOT NULL default ''",
-];
-
+];*/
 
 $GLOBALS['TL_DCA']['tl_layout']['fields']['fileLazyLoaderStylePath'] = [
     'label' => &$GLOBALS['TL_LANG']['tl_layout']['fileLazyLoaderStylePath'],
@@ -139,10 +129,10 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['fileLazyLoaderStylePath'] = [
     'eval' => [
         'multiple' => true,
         'fieldType' => 'checkbox',
-        #'filesOnly' => true,
-        #'extensions' => 'css,scss,less',
-        'submitOnChange' => true,
-        'alwaysSave' => true,
+        'mandatory' => false,
+        'files' => true,
+        'filesOnly' => true,
+        'extensions' => 'css,scss,less',
         'tl_class' => 'fileLazyLoaderStylePath'
     ],
     'sql' => "BLOB NULL",
@@ -176,7 +166,6 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['fileLazyLoaderStyleFilesLoad'] = [
                 'inputType' => 'select',
                 'options' => [
                     'head' => 'Head',
-                    'footer' => 'Footer',
                     'delay' => 'Script Delay',
                     'preload' => 'Preload',
                     'preload_push' => 'Preload push'
@@ -204,7 +193,7 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['fileLazyLoaderStyleFilesLoad'] = [
         ],
     ],
     'load_callback' => [
-        [StyleLoader::class, 'wizardLoadFileList']
+        [Loader2Style::class, 'getMultiColumnWizardFiles']
     ],
     'sql' => "blob NULL"
 ];

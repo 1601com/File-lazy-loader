@@ -1,7 +1,7 @@
 <?php
 
-use Agentur1601com\FileLazyLoader\EventListener\Loader\JsLoader;
-use Agentur1601com\FileLazyLoader\EventListener\Loader\StyleLoader;
+use \Agentur1601com\FileLazyLoader\EventListener\Loader2\Loader2Style;
+use \Agentur1601com\FileLazyLoader\EventListener\Loader2\Loader2JS;
 
 // agentur1601core backend menu entry
 $GLOBALS['BE_MOD']['agentur1601com']['file-lazy-loader'] = [
@@ -11,5 +11,6 @@ $GLOBALS['BE_MOD']['agentur1601com']['file-lazy-loader'] = [
 // language output for backend entry
 $GLOBALS['TL_LANG']['MOD']['file-lazy-loader'] = ['FileLazyLoader', ''];
 
-$GLOBALS['TL_HOOKS']['generatePage'][] = [StyleLoader::class, 'generatePageCallback'];
-$GLOBALS['TL_HOOKS']['generatePage'][] = [JsLoader::class, 'loadJs'];
+$GLOBALS['TL_HOOKS']['generatePage'][] = [Loader2Style::class, 'generateTemplateFiles'];
+
+$GLOBALS['TL_HOOKS']['generatePage'][] = [Loader2JS::class, 'generateTemplateFiles'];

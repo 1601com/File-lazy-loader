@@ -9,15 +9,11 @@ services:
         resource: '../../../src/*'
         exclude: '../../../src/{DependencyInjection,Entity,Tests,Kernel.php,Resources}'
 
-    Agentur1601com\FileLazyLoader\EventListener\SeoSeeFiles:
+    Agentur1601com\FileLazyLoader\EventListener\Loader2\Loader2JS:
         public: true
         autowire: true
 
-    Agentur1601com\FileLazyLoader\EventListener\Loader\StyleLoader:
-        public: true
-        autowire: true
-
-    Agentur1601com\FileLazyLoader\EventListener\Loader\JsLoader:
+    Agentur1601com\FileLazyLoader\EventListener\Loader2\Loader2Style:
         public: true
         autowire: true
 
