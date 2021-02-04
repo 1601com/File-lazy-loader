@@ -3,6 +3,11 @@
   "type": "contao-bundle",
   "description": "",
   "homepage": "https://1601.com",
+  "support": {
+    "email": "support@1601.com",
+    "issues": "https://github.com/1601com/File-lazy-loader/issues",
+    "docs": "https://github.com/1601com/File-lazy-loader/blob/master/README.md"
+  },
   "license": "MIT",
   "authors": [
     {
@@ -17,8 +22,8 @@
     }
   ],
   "require": {
-    "php": "^5.6 || ^7.0",
-    "contao/core-bundle": "4.*",
+    "php": "^7.1",
+    "contao/core-bundle": "^4.9",
     "menatwork/contao-multicolumnwizard":"^3.0",
     "matthiasmullie/minify":"^1.3",
     "agentur1601com/core-bundle": "*"
