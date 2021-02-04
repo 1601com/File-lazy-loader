@@ -36,7 +36,7 @@ class Loader2Style extends AbstractLoader2
                 continue;
             }
 
-            $link = $this->_minify($file['style_files_path']);
+            $link = $this->_combine($file['style_files_path']);
 
             switch ($file["style_param"]) {
                 case 'preload':
@@ -44,7 +44,7 @@ class Loader2Style extends AbstractLoader2
                     $GLOBALS['TL_HEAD'][] = $this->_getStyleTag($link);
                     break;
                 case 'preload_push':
-                    header("Link: <" . $link . ">; rel=preload; as=style", false);
+                    header("Link: <" . $link . ">; rel=preload; as=style>", false);
                     $GLOBALS['TL_HEAD'][] = $this->_getStyleTag($link);
                     break;
                 case 'delay':
@@ -122,7 +122,7 @@ class Loader2Style extends AbstractLoader2
      * @param string $source
      * @return string
      */
-    protected function _minify(string $source): string
+    protected function _combine(string $source): string
     {
         if (!file_exists(TL_ROOT . '/' . $source)) {
             return $source;

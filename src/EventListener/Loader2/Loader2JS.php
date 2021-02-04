@@ -48,7 +48,7 @@ class Loader2JS extends AbstractLoader2
                     $GLOBALS['TL_HEAD'][] = $this->_getScriptTag($link);
                     break;
                 case 'preload_push':
-                    header("Link: <" . $link . ">; rel=preload; as=script", false);
+                    header("Link: <" . $link . ">; rel=preload; as=script>", false);
                     array_unshift($GLOBALS['TL_HEAD'], $this->_getScriptTag($link));
                     break;
                 case 'defer':

@@ -30,12 +30,6 @@ abstract class AbstractLoader2 {
     abstract protected function _loadFilesByFillTree(DataContainer $dataContainer): array;
 
     /**
-     * @param string $source
-     * @return string
-     */
-    abstract protected function _minify(string $source): string;
-
-    /**
      * @param string $path
      * @return string
      */
