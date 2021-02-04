@@ -59,12 +59,12 @@ class Loader2Style extends AbstractLoader2
     }
 
     /**
-     * @param string $savedFiles
+     * @param string|null $savedFiles
      * @param DataContainer $dataContainer
      * @return string
      * @throws \Exception
      */
-    public function getMultiColumnWizardFiles(string $savedFiles, DataContainer $dataContainer): string
+    public function getMultiColumnWizardFiles(?string $savedFiles, DataContainer $dataContainer): string
     {
         if (TL_MODE == 'BE') {
             $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/filelazyloader/js/lazy-style-loader.js|static';
@@ -72,9 +72,11 @@ class Loader2Style extends AbstractLoader2
 
         $files = $this->_loadFilesByFillTree($dataContainer);
 
+        $savedFiles = $savedFiles ? unserialize($savedFiles) : [];
+
         $wizardFiles = [];
 
-        foreach (unserialize($savedFiles) as $savedFile) {
+        foreach ($savedFiles as $savedFile) {
             if (!is_numeric($key = array_search($savedFile['style_files_path'], $files))) {
                 continue;
             }

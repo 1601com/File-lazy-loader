@@ -62,24 +62,20 @@ class Loader2JS extends AbstractLoader2
     }
 
     /**
-     * @param string $savedFiles
+     * @param string|null $savedFiles
      * @param DataContainer $dataContainer
      * @return string
      * @throws \Exception
      */
-    public function getMultiColumnWizardFiles(string $savedFiles, DataContainer $dataContainer): string
+    public function getMultiColumnWizardFiles(?string $savedFiles, DataContainer $dataContainer): string
     {
-        $savedFiles = array_reverse($savedFiles ? unserialize($savedFiles) : []);
+        $savedFiles = $savedFiles ? array_reverse(unserialize($savedFiles)) : [];
 
         $files = $this->_loadFilesByFillTree($dataContainer);
 
         $returnArray = [];
 
         foreach ($savedFiles as $savedFile) {
-            /*if ($savedFile['js_files_extFile'] === "1") {
-                array_unshift($returnArray, $savedFile);
-                continue;
-            }*/
 
             foreach ($files as $pathLoadedKey => $pathLoadedFile) {
                 if (str_replace(TL_ROOT, "", $pathLoadedFile) === $savedFile['js_files_path']) {
