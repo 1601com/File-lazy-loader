@@ -32,8 +32,7 @@ class Loader2Style extends AbstractLoader2
         }
 
         foreach ($files as $file) {
-
-            if (!file_exists(TL_ROOT . '/' . $file['style_files_path'])) {
+            if (!$file || !file_exists(TL_ROOT . '/' . $file['style_files_path']) || !$file['style_files_path']) {
                 continue;
             }
 
@@ -125,6 +124,10 @@ class Loader2Style extends AbstractLoader2
      */
     protected function _minify(string $source): string
     {
+        if (!file_exists(TL_ROOT . '/' . $source)) {
+            return $source;
+        }
+
         $combiner = new Combiner();
         $combiner->add($source);
         return $combiner->getCombinedFile();
