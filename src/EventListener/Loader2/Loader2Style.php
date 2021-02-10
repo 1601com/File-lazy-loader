@@ -44,7 +44,7 @@ class Loader2Style extends AbstractLoader2
                     $GLOBALS['TL_HEAD'][] = $this->_getStyleTag($link);
                     break;
                 case 'preload_push':
-                    header("Link: <" . $link . ">; rel=preload; as=style>", false);
+                    header("Link: <" . $link . ">; rel=preload; as=style", false);
                     $GLOBALS['TL_HEAD'][] = $this->_getStyleTag($link);
                     break;
                 case 'delay':
