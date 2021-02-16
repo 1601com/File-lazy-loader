@@ -7,7 +7,7 @@ This way optimized scripts and styles can be loaded for Google.
 
 ### Installation
 
-`$ composer require agentur1601com/social-media-bar`
+`$ composer require agentur1601com/file-lazy-loader`
 
 ### Options JavaScript
 
