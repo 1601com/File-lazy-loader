@@ -140,7 +140,7 @@ class Loader2Style extends AbstractLoader2
     private function _getScriptStyle(string $href): string
     {
         $script = "<script>setTimeout(function() {document.head.innerHTML += '%s';});</script><noscript>%s</noscript>";
-        return \Safe\sprintf($script, $this->_getStyleTag($href), $this->_getStyleTag($href));
+        return sprintf($script, $this->_getStyleTag($href), $this->_getStyleTag($href));
     }
 
     /**
