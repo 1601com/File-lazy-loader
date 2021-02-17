@@ -21,7 +21,7 @@ $GLOBALS['TL_LANG'][TABLE_NAME]['fileLazyLoader_files_style_legend'] = 'FileLazy
 
 $GLOBALS['TL_LANG'][TABLE_NAME]['fileLazyLoaderStylePath'] = ['CSS, SCSS, LESS', ''];
 $GLOBALS['TL_LANG'][TABLE_NAME]['fileLazyLoaderStyleFilesLoad'] = ['Style-Dateien', ''];
-$GLOBALS['TL_LANG'][TABLE_NAME]['fileLazyLoaderStyleIEFix'] = ['IE Fix', 'Loading all styles over head'];
+$GLOBALS['TL_LANG'][TABLE_NAME]['fileLazyLoaderStyleIEFix'] = ['IE Fix', 'Load all styles via head'];
 
 $GLOBALS['TL_LANG'][TABLE_NAME]['style_select'] = ["Aktiv"];
 $GLOBALS['TL_LANG'][TABLE_NAME]['style_files_path'] = ["Pfad"];
