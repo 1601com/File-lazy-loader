@@ -14,6 +14,7 @@ PaletteManipulator::create()
     ->addLegend('fileLazyLoader_files_style_legend', 'fileLazyLoader_files_js_legend', PaletteManipulator::POSITION_AFTER)
     ->addField('fileLazyLoaderStylePath', 'fileLazyLoader_files_style_legend', PaletteManipulator::POSITION_APPEND)
     ->addField('fileLazyLoaderStyleFilesLoad', 'fileLazyLoader_files_style_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('fileLazyLoaderStyleIEFix', 'fileLazyLoader_files_style_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('default', 'tl_layout');
 
 $GLOBALS['TL_DCA']['tl_layout']['fields']['fileLazyLoaderJsPath'] = [
@@ -197,3 +198,13 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['fileLazyLoaderStyleFilesLoad'] = [
     ],
     'sql' => "blob NULL"
 ];
+
+$GLOBALS['TL_DCA']['tl_layout']['fields']['fileLazyLoaderStyleIEFix'] = [
+    'label'                 => &$GLOBALS['TL_LANG']['tl_layout']['fileLazyLoaderStyleIEFix'],
+    'exclude'               => true,
+    'inputType'             => 'checkbox',
+    'default'               => 1,
+    'eval'                  => ['tl_class'=>'w50'],
+    'sql'                   => "char(1) NOT NULL default ''"
+];
+

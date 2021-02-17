@@ -15,7 +15,7 @@ class Helper
      * @return array
      * @throws \Exception
      */
-    public function getPathsByUUIDs($fileTree):array
+    public function getPathsByUUIDs($fileTree): array
     {
         if(!$fileTree)
         {
@@ -125,16 +125,16 @@ class Helper
         {
             return true;
         }
+
         return mkdir($dir);
     }
 
     /**
-     * @param string $path
-     * @return mixed
+     * @return bool
      */
-    public function generateMinFileName(string $path)
+    public static function isIE(): bool
     {
-        $dataFile = pathinfo($path);
-        return trim("seosee_" . md5($dataFile["dirname"]) . "_" . $dataFile["filename"] . ".min." . $dataFile["extension"]);
+        return strpos(\Environment::get('httpUserAgent'), 'MSIE') !== FALSE ||
+        strpos(\Environment::get('httpUserAgent'), 'Trident') !== FALSE;
     }
 }

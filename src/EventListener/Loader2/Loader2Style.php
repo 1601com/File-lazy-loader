@@ -2,6 +2,7 @@
 
 namespace Agentur1601com\FileLazyLoader\EventListener\Loader2;
 
+use Agentur1601com\FileLazyLoader\Service\Helper;
 use Contao\Combiner;
 use Contao\DataContainer;
 use Contao\FilesModel;
@@ -13,7 +14,7 @@ use Contao\Template;
 
 class Loader2Style extends AbstractLoader2
 {
-    private $_combiner = null;
+    private $_combiner;
 
     public function __construct()
     {
@@ -37,6 +38,10 @@ class Loader2Style extends AbstractLoader2
             }
 
             $link = $this->_combine($file['style_files_path']);
+
+            if (intval($layout->fileLazyLoaderStyleIEFix) === 1 && Helper::isIE()) {
+                $file["style_param"] = 'head';
+            }
 
             switch ($file["style_param"]) {
                 case 'preload':
