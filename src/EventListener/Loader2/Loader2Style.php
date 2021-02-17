@@ -155,6 +155,11 @@ class Loader2Style extends AbstractLoader2
     private function _getStyleTag(string $href): string
     {
         $options = StringUtil::resolveFlaggedUrl($href);
+
+        if (Helper::isIE()) {
+            $href = '/' . $href;
+        }
+
         return Template::generateStyleTag($href, $options->media, $options->mtime);
     }
 }
